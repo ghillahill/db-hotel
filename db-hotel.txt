@@ -17,7 +17,7 @@ dell’esecuzione della query)
 
 SELECT * 
 FROM `ospiti` 
-WHERE year(CURDATE()) - year(date_of_birth) > 20
+WHERE CURDATE() > DATE_ADD(`date_of_birth`, INTERVAL 20 year)
 
 
 //Seleziona tutti gli ospiti il cui nome inizia con la D
