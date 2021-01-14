@@ -99,3 +99,20 @@ FROM `prenotazioni_has_ospiti`
 GROUP BY `ospite_id`
 ORDER BY `ospite` DESC
 LIMIT 1
+
+
+
+
+JOIN
+
+//Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?
+
+SELECT ospiti.name, COUNT(*) AS `numero_prenotazioni` 
+FROM ospiti 
+JOIN prenotazioni_has_ospiti ON ospiti.id = prenotazioni_has_ospiti.ospite_id 
+GROUP BY ospiti.name, ospiti.lastname 
+HAVING numero_prenotazioni > 2 
+ORDER BY numero_prenotazioni ASC
+
+
+//Stampare tutti gli ospiti per ogni prenotazione
