@@ -116,3 +116,7 @@ ORDER BY numero_prenotazioni ASC
 
 
 //Stampare tutti gli ospiti per ogni prenotazione
+
+SELECT name, prenotazioni_has_ospiti.prenotazione_id
+FROM ospiti
+JOIN prenotazioni_has_ospiti ON ospiti.id = prenotazioni_has_ospiti.ospite_id
