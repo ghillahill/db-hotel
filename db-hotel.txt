@@ -49,7 +49,7 @@ WHERE document_type = 'Driver License' AND year(date_of_birth) = 1975
 
 //Quanti paganti sono anche ospiti?
 
-SELECT *
+SELECT COUNT(*)
 FROM `paganti`
 WHERE ospite_id IS NOT NULL
 
@@ -57,3 +57,14 @@ WHERE ospite_id IS NOT NULL
 
 SELECT SUM(beds)
 FROM `stanze`
+
+
+
+
+Groupby
+
+//Conta gli ospiti raggruppandoli per anno di nascita
+
+SELECT COUNT(*) AS `numero_ospiti`, YEAR(`date_of_birth`) AS `anno_di_nascita`
+FROM `ospiti`
+GROUP BY YEAR(`date_of_birth`)
