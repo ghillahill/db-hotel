@@ -110,7 +110,7 @@ JOIN
 SELECT ospiti.name, COUNT(*) AS `numero_prenotazioni` 
 FROM ospiti 
 JOIN prenotazioni_has_ospiti ON ospiti.id = prenotazioni_has_ospiti.ospite_id 
-GROUP BY ospiti.name, ospiti.lastname 
+GROUP BY ospiti.name 
 HAVING numero_prenotazioni > 2 
 ORDER BY numero_prenotazioni ASC
 
