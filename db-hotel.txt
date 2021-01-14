@@ -124,22 +124,22 @@ JOIN prenotazioni_has_ospiti ON ospiti.id = prenotazioni_has_ospiti.ospite_id
 
 //Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte a Maggio 2018
 
-SELECT prenotazioni.id as id_prenotazione, paganti.name as nome_pagante, paganti.lastname as cognome_pagante, ospiti.name as nome_ospite, ospiti.lastname as cognome_ospite, pagamenti.price, prenotazioni.created_at 
+SELECT prenotazioni.id as id_prenotazione, `paganti`.`name` as nome_pagante, `paganti`.`lastname` as cognome_pagante, `ospiti`.`name` as nome_ospite, `ospiti`.`lastname` as cognome_ospite, `pagamenti`.`price`, `prenotazioni`.`created_at` 
 FROM paganti 
-JOIN pagamenti ON paganti.id = pagamenti.pagante_id 
-JOIN prenotazioni ON pagamenti.prenotazione_id = prenotazioni.id 
-JOIN prenotazioni_has_ospiti ON prenotazioni.id = prenotazioni_has_ospiti.prenotazione_id 
-JOIN ospiti ON prenotazioni_has_ospiti.ospite_id = ospiti.id 
-WHERE MONTH(prenotazioni.created_at) = 5 AND YEAR(prenotazioni.created_at) = 2018
+JOIN pagamenti ON `paganti`.`id` = `pagamenti`.`pagante_id`
+JOIN prenotazioni ON `pagamenti`.`prenotazione_id` = `prenotazioni`.`id`
+JOIN prenotazioni_has_ospiti ON `prenotazioni`.`id` = `prenotazioni_has_ospiti`.`prenotazione_id`
+JOIN ospiti ON `prenotazioni_has_ospiti`.`ospite_id` = `ospiti`.`id` 
+WHERE MONTH(`prenotazioni`.`created_at`) = 5 AND YEAR(`prenotazioni`.`created_at`) = 2018
 
 
 //Fai la somma di tutti i prezzi delle prenotazioniper le stanze delprimo piano
 
 SELECT SUM(`pagamenti`.`price`) AS `prezzo_totale_primo_piano`
 FROM `stanze`
-JOIN `prenotazioni` ON `stanze`.`id` = `prenotazioni.stanza_id`
-JOIN `pagamenti` ON `prenotazioni.id` = `pagamenti.prenotazione_id`
-WHERE `pagamenti.status` = 'accepted' AND `stanze`.`floor` = 1
+JOIN `prenotazioni` ON `stanze`.`id` = `prenotazioni`.`stanza_id`
+JOIN `pagamenti` ON `prenotazioni`.`id` = `pagamenti`.`prenotazione_id`
+WHERE `pagamenti`.`status` = 'accepted' AND `stanze`.`floor` = 1
 
 
 //Prendi i dati di fatturazione per la prenotazione con id=7
