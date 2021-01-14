@@ -120,3 +120,36 @@ ORDER BY numero_prenotazioni ASC
 SELECT name, prenotazioni_has_ospiti.prenotazione_id
 FROM ospiti
 JOIN prenotazioni_has_ospiti ON ospiti.id = prenotazioni_has_ospiti.ospite_id
+
+
+//Stampare Nome, Cognome, Prezzo e Pagante per tutte le prenotazioni fatte a Maggio 2018
+
+
+
+
+//Fai la somma di tutti i prezzi delle prenotazioniper le stanze delprimo piano
+
+SELECT SUM(`pagamenti`.`price`) AS `prezzo_totale_primo_piano`
+FROM `stanze`
+JOIN `prenotazioni`
+ON `stanze`.`id` = `prenotazioni.stanza_id`
+JOIN `pagamenti`
+ON `prenotazioni.id` = `pagamenti.prenotazione_id`
+WHERE `pagamenti.status` = 'accepted' AND `stanze`.`floor` = 1
+
+
+//Prendi i dati di fatturazione per la prenotazione con id=7
+
+SELECT `pagamenti`.`prenotazione_id`, `paganti`.`name`, `paganti`.`lastname`, `paganti`.`address`, `pagamenti`.`price`
+FROM `pagamenti`
+JOIN `paganti` ON `pagamenti`.`pagante_id` = `paganti`.`id`
+WHERE `pagamenti`.`prenotazione_id` = 7
+
+
+//Le stanze sono state tutte prenotate almeno una volta?
+//(Visualizzare le stanze non ancora prenotate)
+
+SELECT `stanze`.`id`, `stanze`.`floor`, `stanze`.`room_number` 
+FROM `stanze`
+LEFT JOIN `prenotazioni` ON `stanze`.`id` = `prenotazioni`.`stanza_id`
+WHERE `prenotazioni`.`stanza_id` IS NULL
