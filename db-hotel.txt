@@ -94,3 +94,8 @@ ORDER BY `prenotazioni` DESC
 
 //Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
 
+SELECT COUNT(ospite_id) AS `ospite`, `ospite_id`
+FROM `prenotazioni_has_ospiti`
+GROUP BY `ospite_id`
+ORDER BY `ospite` DESC
+LIMIT 1
