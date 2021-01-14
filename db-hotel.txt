@@ -65,6 +65,14 @@ Groupby
 
 //Conta gli ospiti raggruppandoli per anno di nascita
 
-SELECT COUNT(*) AS `numero_ospiti`, YEAR(`date_of_birth`) AS `anno_di_nascita`
+SELECT COUNT(*) AS `ospiti`, YEAR(`date_of_birth`) AS `anno_di_nascita`
 FROM `ospiti`
 GROUP BY YEAR(`date_of_birth`)
+
+
+//Somma i prezzi dei pagamenti raggruppandoli per status
+
+SELECT `status`, SUM(`price`)
+FROM `pagamenti`
+GROUP BY `status`
+
